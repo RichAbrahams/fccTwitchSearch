@@ -2,7 +2,7 @@ import { put, takeEvery, fork, call } from 'redux-saga/effects';
 import { GET_TWITCH_DATA } from '../constants';
 import * as actions from '../actions';
 import streamers from './streamers';
-
+import keys from '../keys/keys';
 
 const buildUrl = (type) => {
   const url = streamers.reduce((list, streamer, index) => {
@@ -14,9 +14,10 @@ const buildUrl = (type) => {
 
 async function fetchData(url) {
   try {
+    console.log(keys.clientID);
     const request = new Request(url, {
       headers: new Headers({
-        'Client-ID': '54hzo9bwldfb47s61m4ipd2krmv0i4',
+        'Client-ID': keys.clientID,
       }),
     });
     const response = await fetch(request);
